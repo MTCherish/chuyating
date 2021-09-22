@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var xmlhttp=new XMLHttpRequest();
+        xmlhttp.open("GET",'test.json',true);
+        xmlhttp.send();
+        xmlhttp.onreadystatechange=function(){
+            if(xmlhttp.readyState==4&&xmlhttp.status==200){
+                let content=JSON.parse(xmlhttp.responseText);
+            }
+        }
+    </script>
+</body>
+</html>

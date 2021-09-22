@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var fib = function (n) {
+            if (n < 2) {
+                return n % 1000000007
+            } else {
+                return (fib(n - 2) + fib(n - 1)) % 1000000007
+            }
+        };
+        const fib = n => {
+            const dp = [0, 1];
+            for (let i = 2; i <= n; i++) {
+                dp[i] = (dp[i - 1] + dp[i - 2]) % 1000000007;
+            }
+            return dp[n];
+        };
+    </script>
+</body>
+
+</html>

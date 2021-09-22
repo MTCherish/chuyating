@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var lengthOfLongestSubstring = function (s) {
+        //     if (s.length == 0) {
+        //         return 0
+        //     } else if (s.length == 1) {
+        //         return 1
+        //     } else {
+        //         let arr = s.split("");
+        //         let l = 0;
+        //         let result = [];
+        //         for (let i = 0; i < arr.length; i++) {
+        //             let obj = {};
+        //             for (let j = i; j < arr.length; j++) {
+        //                 let key = arr[j];
+        //                 console.log(obj)
+        //                 if (!obj[key]) {
+        //                     obj[key] = 1;
+        //                     l++;
+        //                     console.log(i,l)
+        //                     // if(l==arr.length){
+        //                     //     return arr.length;
+        //                     // }
+        //                 } else {
+        //                     result.push(l);
+        //                     l = 0;
+        //                     continue;
+        //                 }
+        //             }
+        //         }
+        //         result.sort((a, b) => (b - a));
+        //         return result[0];
+        //     }
+        // };
+        // console.log(lengthOfLongestSubstring('pwwk'));
+
+        // var lengthOfLongestSubstring = function (s) {
+        //     let set = new Set()
+        //     let right = 0,
+        //         maxLen = 0
+        //     for (let i = 0; i < s.length; i++) {
+        //         if (i != 0) {
+        //             set.delete(s.charAt(i - 1))
+        //         }
+        //         while (right  < s.length && !set.has(s.charAt(right))) {
+        //             set.add(s.charAt(right + 1))
+        //                 right++
+        //         }
+        //         maxLen = Math.max(maxLen, right - i)
+        //     }
+        //     return maxLen
+        // }
+        var lengthOfLongestSubstring = function (s) {
+            // 哈希集合，记录每个字符是否出现过
+            const occ = new Set();
+            const n = s.length;
+            // 右指针，初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动
+            let rk = -1,
+                ans = 0;
+            for (let i = 0; i < n; ++i) {
+                if (i != 0) {
+                    // 左指针向右移动一格，移除一个字符
+                    occ.delete(s.charAt(i - 1));
+                }
+                while (rk + 1 < n && !occ.has(s.charAt(rk + 1))) {
+                    // 不断地移动右指针
+                    occ.add(s.charAt(rk + 1));
+                    ++rk;
+                }
+                // 第 i 到 rk 个字符是一个极长的无重复字符子串
+                ans = Math.max(ans, rk - i + 1);
+            }
+            return ans;
+        };
+
+
+        let s = "abcabcbb"
+        console.log(lengthOfLongestSubstring(s))
+    </script>
+</body>
+
+</html>

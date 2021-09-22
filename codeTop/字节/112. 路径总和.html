@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Btree {
+            constructor(data) {
+                this.data = data
+                this.left = null
+                this.right = null
+            }
+        }
+        class Create {
+            constructor(arr) {
+                this.root = null
+                arr.forEach((item) => {
+                    this.insert(item)
+                })
+                return this.root
+            }
+            insert(val) {
+                if (!this.root) {
+                    this.root = new Btree(val)
+                } else {
+                    this.inserNode(this.root, val)
+                }
+            }
+            inserNode(node, val) {
+                if (node.data < val) {
+                    if (!node.right) {
+                        node.right = new Btree(val)
+                    } else {
+                        this.inserNode(node.right, val)
+                    }
+                } else {
+                    if (!node.left) {
+                        node.left = new Btree(val)
+                    } else {
+                        this.inserNode(node.left, val)
+                    }
+                }
+            }
+        }
+        // var hasPathSum = function (root, targetSum) {
+        //     if (!root) return false
+        //     // 创建两个队列
+        //     // 用来存储节点
+        //     let nodeQue = []
+        //     // 用来存储根节点到这个节点的总和
+        //     let valQue = []
+
+        //     // 先将根节点入队列
+        //     nodeQue.unshift(root)
+        //     valQue.unshift(root.data)
+
+        //     while (nodeQue.length > 0) {
+        //         // 将队头元素取出来得到节点root和值temp
+        //         let root = nodeQue.pop()
+        //         let temp = valQue.pop()
+
+        //         // 如果这个节点是叶子节点（没有左右孩子）
+        //         if (!root.left && !root.right) {
+        //             // 如何符合要求返回true 并 退出函数
+        //             if (temp === targetSum) return true
+        //             // 不满足要求 下面的都不会满足，就进行下一轮循环了
+        //         }
+        //         // 有左孩子就进来
+        //         if (root.left) {
+        //             // 左孩子进队列
+        //             nodeQue.unshift(root.left)
+        //             // 保存此时路径总和
+        //             valQue.unshift(root.left.data + temp)
+        //         }
+        //         // 有右孩子就进来
+        //         if (root.right) {
+        //             // 右孩子进队列
+        //             nodeQue.unshift(root.right)
+        //             // 保存此时路径总和
+        //             valQue.unshift(root.right.data + temp)
+        //         }
+        //     }
+        //     // 循环走完都没有返回true就说明没有符合要求的路径总和
+        //     return false
+
+        // };
+        var hasPathSum = function (root, targetSum) {
+            if (!root) return false
+            if (!root.left && !root.right) return root.data == targetSum
+            return hasPathSum(root.left, targetSum - root.data) || hasPathSum(root.right, targetSum - root.data)
+        }
+        let tree = new Create([3])
+        console.log(tree)
+        console.log(hasPathSum(tree, 3))
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr=[3,1,2,2,4,1]
+        // let set=new Set(arr)
+        // let newArr=Array.from(set)
+        // console.log(newArr) 
+
+        // let newArr=arr.reduce((pre,cur)=>{
+        //     if(!pre.includes(cur)){
+        //         return pre.concat(cur)
+        //     }else{
+        //         return pre
+        //     }
+        // },[])
+
+        function fn(arr){
+            let obj={}
+            let result=[]
+            for(let i=0;i<arr.length;i++){
+                let key=arr[i]
+                if(!obj[key]){
+                    obj[key]=1
+                    result.push(key)
+                }else{
+                    obj[key]++
+                }
+            }
+            return result
+        }
+        console.log(fn(arr))
+    </script>
+</body>
+</html>

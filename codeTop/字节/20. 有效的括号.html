@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var isValid = function (s) {
+        //     let arr=s.split(",")
+        //     let arr1=[],arr2=[]
+        //     arr.forEach(element => {
+        //         arr1.unshift(element)
+        //     });
+        //     while(arr1.length!=0){
+        //         arr2.unshift(arr1.shift())
+        //     }
+        //     return arr.join("")==arr2.join("")
+        // };
+        // let s = "(]"
+        // console.log(isValid(s))
+        var isValid = function (s) {
+            const n = s.length;
+            if (n % 2 === 1) {
+                return false;
+            }
+            const pairs = new Map([
+                [')', '('],
+                [']', '['],
+                ['}', '{']
+            ]);
+            const stk = [];
+            for (let ch of s) {
+                if (pairs.has(ch)) {
+                    // 查找键名，即key
+                    console.log(ch)
+                    if (!stk.length || stk[stk.length - 1] !== pairs.get(ch)) {
+                        return false;
+                    }
+                    stk.pop();
+                } else {
+                    stk.push(ch);
+                }
+            };
+            return !stk.length;
+        };
+        console.log(isValid("({})"))
+    </script>
+</body>
+
+</html>

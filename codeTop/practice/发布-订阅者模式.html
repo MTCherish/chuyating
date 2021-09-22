@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class EventEmitter{
+            constructor(){
+                this.listener=[]
+            }
+            on(eventName,fn){
+                if(!this.listener[eventName]){
+                    this.listener[eventName]=[]
+                }
+                this.listener[eventName].push(fn)
+            }
+            off(eventName,fn){
+                if(!this.listener[eventName]){
+                    return false
+                }
+                if(!fn){
+                    this.listener[eventName]&&(this.listener[eventName].length=0)
+                }else{
+                    for(let i=0;i<this.listener[eventName].length;i++){
+                        if(this.listener[eventName]==fn&&this.listener[eventName].fn==fn){
+                            this.listener[eventName].splice(i,1)
+                            break
+                        }
+                    }
+                }
+            }
+            once(eventName,fn){
+                this.on=()=>{
+                    this.off(eventName,fn)
+                    fn.apply(this,arguments)
+                }
+                fn.on=on
+                this.on(eventName,on)
+            }
+            emits(eventName,data){
+                if(this.listener[eventName]){
+                    this.listener[eventName].forEach(item=>{
+                        item(data)
+                    })
+                }
+            }
+        }
+        function aa(x){
+            console.log(x)
+        }
+        let event=new EventEmitter()
+        event.on('chuyating',aa)
+        event.emits('chuyating','hello')
+        event.off('chuyating',aa)
+    </script>
+</body>
+</html>

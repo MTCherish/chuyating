@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function flatten(arr){
+        //     let result=[]
+        //     arr.forEach((item)=>{
+        //         if(Array.isArray(item)){
+        //             result=result.concat(fn(item))
+        //         }else{
+        //             result.push(item)
+        //         }
+        //     })
+        //     return result
+        // }
+
+        Array.prototype._flat=function(target){
+            let result=[]
+            if(target==0) return this
+            this.forEach((item)=>{
+                if(Array.isArray(item)){
+                    result=result.concat(item._flat(target-1))
+                }else{
+                    result.push(item)
+                }
+            })
+            return result
+        }
+        console.log([1,2,3,[4,5],[6,[7]]]._flat(3))
+
+    </script>
+</body>
+</html>

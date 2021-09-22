@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        // 滑动窗口：当前和<target时，右指针向右挪一个，当前和>tartget，左指针向右挪一个
+        // 如果最小子数组长度小于右-左，最小子数组则保持不变，若大于右-左，则替换为右-左的长度
+        var minSubArrayLen = function(target, nums) {
+            let left=0,right=0,sum=0,minLen=nums.length+1;
+            while(right<nums.length){
+                sum+=nums[right++]
+                while(sum>=target){
+                    minLen=minLen<right-left?minLen:right-left
+                    sum-=nums[left++]
+                }
+            }
+            return minLen>nums.length?0:minLen
+        }
+        
+        let target = 7, nums = [2,3,1,2,4,3]
+        console.log(minSubArrayLen(target, nums))
+    </script>
+</body>
+
+</html>

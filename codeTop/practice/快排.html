@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function quikSort(arr,left,right){
+            let index
+            left=typeof left!='number'?0:left
+            right=typeof right!='number'?arr.length-1:right
+            if(left<right){
+                index=partation(arr,left,right)
+                quikSort(arr,left,index-1)
+                quikSort(arr,index+1,right)
+            }
+            return arr
+        }
+        function partation(arr,left,right){
+            let pivot=left
+            let index=pivot+1
+            for(let i=index;i<=right;i++){
+                if(arr[i]<arr[pivot]){
+                    [arr[i],arr[index]]=[arr[index],arr[i]]
+                    index++
+                }
+            }
+            [arr[pivot],arr[index-1]]=[arr[index-1],arr[pivot]]
+            return index-1
+        }
+        console.log(quikSort([3,1,5,4,6,2]))
+    </script>
+</body>
+</html>

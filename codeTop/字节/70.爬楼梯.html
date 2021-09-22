@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // f(0)=1,f(1)=1,f(2)=2,f(3)=3,f(4)=5,f(5)=8
+        // 发现规律：后一项是前两项的和，运用滚动数组
+        var climbStairs = function(n) {
+            let p=0,q=0,r=1
+            for(let i=1;i<=n;i++){
+                p=q
+                q=r
+                r=p+q
+            }
+            return r
+        }
+        console.log(climbStairs(5))
+    </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // function quickSort(arr,left,right){
+        //     let index;
+        //     left=typeof left!='number'?0:left;
+        //     right=typeof right!='number'?arr.length-1:right;
+        //     if(left<right){
+        //         index=partation(arr,left,right);
+        //         quickSort(arr,left,index-1);
+        //         quickSort(arr,index+1,right);
+        //     }
+        //     return arr
+        // }
+        // function partation(arr,left,right){
+        //     let pivot=left;
+        //     let index=pivot+1
+        //     for(let i=index;i<=right;i++){
+        //         if(arr[i]<arr[pivot]){
+        //             [arr[i],arr[index]]=[arr[index],arr[i]]
+        //             index++
+        //         }
+        //     }
+        //     [arr[pivot],arr[index-1]]=[arr[index-1],arr[pivot]]
+        //     return index-1
+        // }
+        function quickSort(arr, left, right, k) {
+            var len = arr.length,
+                partitionIndex,
+                left = typeof left != 'number' ? 0 : left,
+                right = typeof right != 'number' ? len - 1 : right;
+            if (left < right) {
+                partitionIndex = partition(arr, left, right);
+                console.log(partitionIndex, k);
+                if (partitionIndex == arr.length - k) {
+                    console.log("onIn", partitionIndex, arr[partitionIndex])
+                    return arr[partitionIndex]
+                } else {
+                //    return k < partitionIndex ? quickSort(arr, left, partitionIndex - 1, k) : quickSort(arr, partitionIndex +1, right, k);
+                    var tar = quickSort(arr, left, partitionIndex - 1, k);
+                    if(tar) return tar;
+                    tar =  quickSort(arr, partitionIndex +1, right, k);
+                    if(tar) return tar;
+                   
+                }
+            }
+        }
+
+        function partition(arr, left, right) { //分区操作
+            // console.log('分区')
+            var pivot = left, //设定基准值（pivot）
+                index = pivot + 1;
+            for (var i = pivot + 1; i <= right; i++) {
+                if (arr[i] < arr[pivot]) {
+                    [arr[i], arr[index]] = [arr[index], arr[i]]
+                    index++;
+                }
+            }
+            [arr[pivot], arr[index - 1]] = [arr[index - 1], arr[pivot]]
+            return index - 1;
+        }
+        let arr = [2, 3, 4]
+        console.log(quickSort(arr, 0, arr.length - 1, 2))
+    </script>
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Quick_Sort(arr, begin, end,k) {
+            if(arr.length - begin -1   == k){
+                return tmp
+            }
+            if (begin > end)
+                return;
+            var tmp = arr[begin];
+            var i =  begin;
+            var j =  end;
+          
+            while (i != j) {
+                while (arr[j] >= tmp && j > i)
+                    j--;
+                while (arr[i] <= tmp && j > i)
+                    i++;
+                if (j > i) {
+                    var t = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = t;
+                }
+            }
+            arr[begin] = arr[i];
+            arr[i] = tmp;
+            
+            Quick_Sort(arr, begin, i - 1,k);
+            Quick_Sort(arr, i + 1, end,k);
+            
+            // return arr
+        }
+
+        var arr = [3,4,1,2,5,3];
+        // var arr = [0]
+        // var arr = [3,2];
+        console.log(Quick_Sort(arr,0,arr.length-1,1))
+    </script>
+</body>
+
+</html> -->

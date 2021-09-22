@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class myPromise{
+            constructor(fn){
+                this.successList=[]
+                this.failList=[]
+                this.state='pending'
+                fn(this.resolveFn.bind(this),this.rejectFn.bind(this))
+            }
+            resolveFn(res){
+                this.state='fulfailed'
+                this.successList.forEach(item=>{
+                     item(res)
+                })
+            }
+            rejectFn(res){
+                this.state='failed'
+                this.failList.forEach(item=>{
+                    item(res)
+                })
+            }
+            then(successFn,failFn){
+                if(typeof successFn=='function'){
+                    this.successList.push(successFn)
+                }
+                if(typeof failFn=='function'){
+                    this.failList.push(failFn)
+                }
+            }
+            catch(failFn){
+                if(typeof failFn=='function'){
+                    this.failList.push(failFn)
+                }
+            }
+        }
+    </script>
+</body>
+</html>

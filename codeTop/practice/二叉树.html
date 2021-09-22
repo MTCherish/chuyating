@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Tree{
+            constructor(data){
+                this.data=data
+                this.left=null
+                this.right=null
+            }
+        }
+        class Create{
+            constructor(arr){
+                this.root=null
+                arr.forEach(element => {
+                    this.insert(element)
+                });
+            }
+            insert(val){
+                if(!this.root){
+                    this.root=new Tree(val)
+                }else{
+                    this.insertNode(this.root,val)
+                }
+            }
+            insertNode(node,val){
+                if(node.data<val){
+                    if(!node.right){
+                        node.right=new Tree(val)
+                    }else{
+                        this.insertNode(node.right,val)
+                    }
+                }else{
+                    if(!node.left){
+                        node.left=new Tree(val)
+                    }else{
+                        this.insertNode(node.left,val)
+                    }
+                }
+            }
+
+            //前序遍历
+            front(){
+                function fn(node){
+                    console.log(data)
+                    if(!node.left){
+                        fn(node.left)
+                    }
+                    if(!node.right){
+                        fn(node.right)
+                    }
+                }
+            }
+
+            //中序遍历
+            middle(){
+                function fn(node){
+                    if(!node.left){
+                        fn(node.left)
+                    }
+                    console.log(data)
+                    if(!node.right){
+                        fn(node.right)
+                    }
+                }
+            }
+
+            //后序遍历
+            after(){
+                function fn(node){
+                    if(!node.left){
+                        fn(node.left)
+                    }
+                    if(!node.right){
+                        fn(node.right)
+                    }
+                    console.log(data)
+                }
+            }
+
+            //广度优先遍历
+            levelOrderTraversal(){
+                function fn(node) {
+                    let result=[]
+                    if(!node){
+                        return result
+                    }
+                    let pre=[]
+                    pre.push(node)
+                    while(pre.length!=0){
+                        node=pre.shift()
+                        result.push(node.data)
+                        if(node.left) pre.push(node.left)
+                        if(node.right) pre.push(node.right)
+                    }
+                    return result
+                }
+                return fn(this.root)
+            }
+        }
+        let tree=new Create([2,4,3,1,2])
+        console.log(tree.levelOrderTraversal())
+    </script>
+</body>
+</html>

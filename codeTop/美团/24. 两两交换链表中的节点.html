@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Node {
+            constructor(val) {
+                this.val = val
+                this.next = null
+            }
+        }
+        class NodeList {
+            constructor(arr) {
+                this.head = new Node(arr[0])
+                let temp = this.head
+                for(let i=1;i<arr.length;i++){
+                    temp.next = new Node(arr[i])
+                    temp = temp.next
+                }
+                return this.head
+            }
+        }
+        //迭代算法
+        var swapPairs = function (head) {
+            const newHead=new Node(0)
+            newHead.next=head
+            let p=newHead
+            while (p.next!= null && p.next.next != null) {
+                const p1=p.next
+                const p2=p1.next
+                p.next=p2
+                p1.next=p2.next
+                p2.next=p1
+                p=p1
+            }
+            return newHead.next
+        };
+        let arr=[1,2,3,4]
+        let nl = new NodeList([1, 2, 3, 4])
+        console.log(nl)
+        console.log(swapPairs(nl))
+    </script>
+</body>
+
+</html>

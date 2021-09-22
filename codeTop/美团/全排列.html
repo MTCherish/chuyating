@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var permute = function (nums) {
+        //     // 保存结果数组，保存每个路径（排列）
+        //     const result = []
+        //     // 调用回溯函数，传入参数
+        //     backtracking(nums, nums.length, [], [])
+        //     // 返回结果数组
+        //     return result
+
+
+        //     // 定义回溯递归函数，传入数组，长度，节点是否被使用过的数组
+        //     // used 用来标记节点是否被用过 path 用来存储路径，定义为一个栈
+        //     function backtracking(nums, len, used, path) {
+        //         // 递归出口
+        //         // 如果到达叶子节点，将路径推入结果数组，并返回
+        //         if (path.length === len) {
+        //             result.push([...path])
+        //             return
+        //         }
+        //         // 遍历候选字符
+        //         for (let i = 0; i < len; i++) {
+        //             // 使用过就下一轮循环
+        //             if (!used[i]) {
+        //                 // undefind和fasle都会进来
+        //                 // 这里说明这个数还没有被使用，入栈path
+        //                 path.push(nums[i])
+        //                 // 标记这个数被使用过了
+        //                 used[i] = true
+        //                 // 开始进行递归
+        //                 backtracking(nums, len, used, path)
+        //                 // 回溯【状态重置】撤销之前的操作
+        //                 path.pop()
+        //                 used[i] = false
+        //             }
+        //         }
+        //     }
+        // };
+        // const permute = nums => {
+        //     if (!nums) return [];
+        //     const res = [];
+        //     // path是组合的数组
+        //     const backtrack = path => {
+        //         if (path.length === nums.length) {
+        //             // 长度满足条件，推入res数组
+        //             res.push(path);
+        //             return;
+        //         }
+        //         nums.forEach(n => {
+        //             // path中已经有n，放弃此轮
+        //             if (path.includes(n)) return;
+        //             // 将n加入path继续找
+        //             backtrack([...path, n]);
+        //         });
+        //     };
+        //     // 从空数组开始
+        //     backtrack([]);
+        //     return res;
+        // };
+        // var permute = function (nums) {
+        //     const res = [];
+        //     backtrack(nums, []);
+        //     return res;
+
+        //     function backtrack(nums, track) {
+        //         if (track.length === nums.length) {
+        //             res.push(track);
+        //             return;
+        //         }
+        //         for (let i = 0; i < nums.length; i++) {
+        //             if (track.includes(nums[i])) {
+        //                 continue;
+        //             };
+        //             track.push(nums[i]);
+        //             // 这里我们拷贝一份，因为后续操作会修改原数组。
+        //             const newTrack = [...track];
+        //             backtrack(nums, newTrack);
+        //             // 递归到该层时将元素还原。
+        //             track.pop();
+        //         }
+        //     }
+        // };
+        // let arr=read_line()
+        // console.log(arr)
+
+        //回溯算法，深度优先搜索
+        const permute = (nums) => {
+            let used={},res=[]
+            function dfs(path){
+                if(path.length==nums.length){
+                    res.push(path.slice())
+                    return
+                }
+                for(let num of nums){
+                    if(used[num]) continue
+                    path.push(num)
+                    used[num]=true
+                    dfs(path)
+                    path.pop()
+                    used[num]=false
+                }
+            }
+            dfs([])
+            return res
+        }
+        console.log(permute([1,2,3]))
+
+    </script>
+</body>
+
+</html>

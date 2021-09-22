@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Btree {
+            constructor(data) {
+                this.data = data
+                this.left = null
+                this.right = null
+            }
+        }
+        class Create {
+            constructor(arr) {
+                this.root = null
+                arr.forEach((item) => {
+                    this.insert(item)
+                })
+            }
+            insert(val) {
+                if (!this.root) {
+                    this.root = new Btree(val)
+                } else {
+                    this.inserNode(this.root, val)
+                }
+            }
+            inserNode(node, val) {
+                if (node.data < val) {
+                    if (!node.right) {
+                        node.right = new Btree(val)
+                    } else {
+                        this.inserNode(node.right, val)
+                    }
+                } else {
+                    if (!node.left) {
+                        node.left = new Btree(val)
+                    } else {
+                        this.inserNode(node.left, val)
+                    }
+                }
+            }
+
+
+            // 广度优先搜索包括：前序，中序和后序
+            //前序遍历
+            front() {
+                function fn(node) {
+                    console.log(node.data)
+                    if (node.left) {
+                        fn(node.left)
+                    }
+                    if (node.right) {
+                        fn(node.right)
+                    }
+                }
+                fn(this.root)
+            }
+            // 中序遍历
+            middle() {
+                function fn(node) {
+                    if (node.left) {
+                        fn(node.left)
+                    }
+                    console.log(node.data)
+                    if (node.right) {
+                        fn(node.right)
+                    }
+                }
+                fn(this.root)
+            }
+
+            //后序遍历
+            behind() {
+                function fn(node) {
+                    if (node.left) {
+                        fn(node.left)
+                    }
+                    if (node.right) {
+                        fn(node.right)
+                    }
+                    console.log(node.data)
+                }
+                fn(this.root)
+            }
+
+            // 广度优先遍历
+            levelOrderTraversal() {
+                function fn(node) {
+                    if (!node) {
+                        throw new Error('Empty Tree')
+                    }
+                    var que = []
+                    que.push(node)
+                    while (que.length !== 0) {
+                        node = que.shift()
+                        console.log(node.data)
+                        if (node.left) que.push(node.left)
+                        if (node.right) que.push(node.right)
+                    }
+                }
+                fn(this.root)
+            }
+
+        }
+
+        let tree = new Create([2, 3, 4, 2, 1])
+        tree.levelOrderTraversal()
+
+        // class Create {
+        //     constructor(arr) {
+        //         this.root = null
+        //         this.cnt = 0;
+        //         arr.forEach((val) => {
+        //             this.insert(val)
+        //         })
+
+        //     }
+        //     insert(val) {
+
+        //         if (!this.root) {
+        //             this.root = new Btree(val)
+        //         } else {
+        //             this.insertNode(this.root, val)
+        //         }
+        //     }
+        //     insertNode(node,val) {
+
+        //         if (!node.left) {
+        //             node.left = new Btree(val)
+        //             return;
+        //         } else if (!node.right) {
+        //             node.right = new Btree(val)
+        //             return;
+        //         } 
+
+        //         if(!node.left.left){
+        //             this.insertNode(node.left,val);
+        //         }else if(!node.left.right){
+        //             this.insertNode(node.left,val);
+        //         }
+
+        //         if(!node.right.left){
+        //             this.insertNode(node.right,val);
+        //         }else if(!node.right.right){
+        //             this.insertNode(node.right,val);
+        //         }
+        //     }
+        // }
+        // class Create {
+        //     constructor(arr) {
+        //         this.size = 0
+        //         this.createTree(arr)
+        //     }
+        //     createTree(arr) {
+        //         if (this.size == arr.length) {
+        //             return
+        //         }
+        //             let val = arr[this.size++];
+        //             // if (val == null) {
+        //             //     return null;
+        //             // }
+        //             //创建根节点
+        //             let node = new Btree(val);
+        //             //构造左子树
+        //             node.left = this.createTree(arr);
+        //             //构造右子树
+        //             node.right = this.createTree(arr);
+        //             //返回根节点
+        //             return node
+        //     }
+        // }
+
+
+        // function creat(arr){
+        //     let res = new Array(arr.length).fill(-1);
+        //     let cnt = 0;
+        //     for(let i = 0 ; i<arr.length;i++){
+        //         if(i == 0){
+        //             res[0]=arr[0];
+        //         }else{
+        //             if(res[2*cnt+1]==-1){
+        //                 res[2*cnt+1] = arr[i];
+        //             }else if(res[2*cnt+1]!=-1&&res[2*cnt+2]==-1){
+        //                 res[2*cnt+2] = arr[i];
+        //                 cnt ++;
+        //             }
+
+        //         }
+        //     }
+        //     return res;
+        // }
+        // console.log(creat([5,4,8,11,null,13,4,7,2,null,null,null,1]));
+    </script>
+</body>
+
+</html>

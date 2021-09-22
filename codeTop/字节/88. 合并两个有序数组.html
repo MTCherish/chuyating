@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 方法一：借助新数组，双指针
+        // var merge = function (nums1, m, nums2, n) {
+        //     let result=new Array(m+n)
+        //     let p1=0,p2=0,cur
+        //     while(p1<m||p2<n){
+        //         if(p1==m){
+        //             cur=nums2[p2++]
+        //         }else if(p2==n){
+        //             cur=nums1[p1++]
+        //         }else if(nums1[p1]<nums2[p2]){
+        //             cur=nums1[p1++]
+        //         }else{
+        //             cur=nums2[p2++]
+        //         }
+        //         result[p1+p2-1]=cur
+        //     }
+        //     return result
+        // }
+        // 方法二：不借助新数组，逆向双指针
+        var merge=function(nums1,m,nums2,n){
+            let temp=m+n-1,p1=m-1,p2=n-1,cur
+            while(p1>=0||p2>=0){
+                if(p1==-1){
+                    cur=nums2[p2--]
+                }else if(p2==-1){
+                    cur=nums1[p1--]
+                }else if(nums1[p1]>nums2[p2]){
+                    cur=nums1[p1--]
+                }else{
+                    cur=nums2[p2--]
+                }
+                nums1[temp--]=cur
+            }
+            return nums1
+        }
+        let nums1 = [1,2,3,0,0,0],nums2 = [2,5,6]
+        console.log(merge(nums1,3,nums2,3))
+    </script>
+</body>
+</html>
