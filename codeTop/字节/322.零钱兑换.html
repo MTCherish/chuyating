@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const coinChange = (coins, amount) => {
+            if (!amount) return 0;
+            let dp = Array(amount + 1).fill(Infinity);
+            dp[0] = 0;
+            for(let i=0;i<coins.length;i++){
+                for(let j=coins[i];j<=amount;j++){
+                    dp[j]=Math.min(dp[j-coins[i]]+1,dp[j])
+                }
+            }
+            return dp[amount]==Infinity?-1:dp[amount]
+        }
+        let coins = [2], amount = 3;
+        console.log(coinChange(coins,amount))
+    </script>
+</body>
+
+</html>
