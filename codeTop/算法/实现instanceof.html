@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //递归
+        var _instanceof = function (a, b) { // 判断a是否在b的原型链上
+
+            if (a.__proto__ === b.prototype) return true;// 找到Object.prototype停止
+
+            if (a.__proto__ === null) return false;
+
+            // if (a === null) return false; // 应该都是可以的
+
+            return _instanceof(a.__proto__, b);
+        }
+
+        //非递归
+        var _instanceof = function (a, b) {
+            let L = a.__proto__;
+            let R = b.prototype;
+
+            while (true) {
+                if (L === R) {
+                    return true;
+                }
+
+                if (L === null) {
+                    return false;
+                }// a.__proto__ === null => a === Object.prototype, 已经找到了原型链的最顶端
+
+                L = L.__proto__;
+            }
+        }
+    </script>
+</body>
+
+</html>
