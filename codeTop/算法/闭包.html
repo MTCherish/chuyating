@@ -32,14 +32,41 @@
         // fn()
 
         // 2、let实现  有块级作用域
+        // function fn(){
+        //     for(let i=0;i<10;i++){
+        //         setTimeout(()=>{
+        //             console.log(i)
+        //         },1000*i)
+        //     }
+        // }
+        // fn()
+
         function fn(){
+            let a=10;
+            return function(a){
+                console.log(a)
+            }
+        }
+        let a=20;
+        fn()(a);
+        
+        // function fn1(){
+        //     for(var i=0;i<10;i++){
+        //         (function(i){
+        //             setTimeout(()=>{
+        //                 console.log(i)
+        //             },1000*i)
+        //         })(i)
+        //     }
+        // }
+        function fn1(){
             for(let i=0;i<10;i++){
                 setTimeout(()=>{
                     console.log(i)
                 },1000*i)
             }
         }
-        fn()
+        fn1()
     </script>
 </body>
 
