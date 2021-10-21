@@ -29,7 +29,6 @@
             // 在内部声明一个函数，利用闭包的特性保存_args并收集所有的参数值
             var _adder = function () {
                 _args.push(...arguments);
-
                 return _adder;
             };
 

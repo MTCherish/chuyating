@@ -26,4 +26,4 @@ function set(obj) {
    obj.name='马腾';
 }
 set(obj);
-console.log(obj.name); // [1, 2, 3, 4]
+console.log(obj.name); // 马腾
