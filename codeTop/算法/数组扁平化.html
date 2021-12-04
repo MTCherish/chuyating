@@ -8,17 +8,17 @@
 </head>
 <body>
     <script>
-        // function flattern(arr){
-        //     let res=[]
-        //     arr.map((val)=>{
-        //         if(Array.isArray(val)){
-        //             res=res.concat(flattern(val))
-        //         }else{
-        //             res.push(val)
-        //         }
-        //     })
-        //     return res
-        // }
+        function flattern(arr){
+            let res=[]
+            arr.map((val)=>{
+                if(Array.isArray(val)){
+                    res=res.concat(flattern(val))
+                }else{
+                    res.push(val)
+                }
+            })
+            return res
+        }
         Array.prototype._flat=function(target){
             let res=[]
             if(target==0) return this

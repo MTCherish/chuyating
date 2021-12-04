@@ -24,17 +24,52 @@
 // 4、因为只有i一个变量，即只有一层循环，且从前往后
 // 5、dp数组变化
 
-var findLengthOfLCIS = function(nums) {
-    let dp=new Array(nums.length).fill(1);
-    let result=0;
-    if(nums.length<=1) return nums.length;
-    for(let i=0;i<nums.length;i++){
-        if(nums[i+1]>nums[i]){
-            dp[i+1]=dp[i]+1;
+// var findLengthOfLCIS = function(nums) {
+//     let dp=new Array(nums.length).fill(1);
+//     let result=0;
+//     if(nums.length<=1) return nums.length;
+//     for(let i=0;i<nums.length;i++){
+//         if(nums[i+1]>nums[i]){
+//             dp[i+1]=dp[i]+1;
+//         }
+//         result=dp[i+1]>result?dp[i+1]:result;
+//     }
+//     return result;
+// };
+// let nums = [1];
+// console.log(findLengthOfLCIS(nums))
+var lengthOfLongestSubstring = function(s) {
+    let arr = [];
+    let max = s[0];
+    for (let i = 0; i < s.length; i ++) {
+        //如果之前存在，就删除，知道没有为止
+        if(arr.indexOf(s[i]) !== -1) {
+            arr.splice(0, arr.indexOf(s[i]) + 1);
         }
-        result=dp[i+1]>result?dp[i+1]:result;
+        //加入当前元素
+        arr.push(s[i]);
+        //取最大
+        if(arr.length>max.length){
+            max=arr.join("")
+        };
     }
-    return result;
+    return max;
 };
-let nums = [1];
-console.log(findLengthOfLCIS(nums))
+console.log(lengthOfLongestSubstring("bbbbb"))
+// function re(dataString){//递归调用，获取最长子串
+//     if(dataString.length){
+//         for(var i=0;i<dataString.length;i++){
+//             var currentString=dataString.substring(i,i+1);//当前一个字符
+//             var lastString=dataString.substring(i+1,dataString.length);//当前字符得后续字符
+//             var p=lastString.indexOf(currentString);//判断后续字符是否存在是否
+//             if(p==-1){
+//                 return currentString+re(lastString);//返回无重复字符
+//             }else{
+//                 return re(dataString.substring(i,p+1));//获取无重复字符得后续子串
+//             }
+//         };
+//     }else{
+//         return "";
+//     }
+// };
+// console.log(re("pwwkew"))
